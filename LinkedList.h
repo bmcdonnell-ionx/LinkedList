@@ -26,7 +26,7 @@
 #include <stdint.h>
 
 /**
- *  @enum node
+ *  @struct node
  *  @brief The Linked List structure
  */ 
 struct node
@@ -36,12 +36,31 @@ struct node
 };
 
 /** Example using the LinkedList Class
- *
- * Example:
  * @code
  * int main(void)
- * {
- * }
+ *  #include "mbed.h"
+ *  #include "LinkedList.h"
+ *  
+ *  LinkedList<node>list;
+ *  
+ *  int main()
+ *  {
+ *      node *tmp;
+ *      
+ *      list.push((char *)"Two\n");
+ *      list.append((char *)"Three\n");
+ *      list.append((char *)"Four\n");
+ *      list.push((char*)"One\n");
+ *      list.append((char*)"Five\n");
+ *      
+ *      for(int i=0; i<list.length(); i++)
+ *      {
+ *          tmp = list.pop(i);
+ *          printf("%s", (char *)tmp->data);
+ *      }
+ *      
+ *      error("done\n");
+ *  }
  * @endcode
  */
 
@@ -71,12 +90,12 @@ public:
      */
     retT *push(void *data);
     
-    /** Add a member to some position in the list
-     *  @param data - Some data type that is added to the list
-     *  @param loc - Place in the list to put the data
-     *  @return The member that was just inserted (NULL if empty)
-     */
-    retT *insert(void *data, uint32_t loc);
+//    /** Add a member to some position in the list
+//     *  @param data - Some data type that is added to the list
+//     *  @param loc - Place in the list to put the data
+//     *  @return The member that was just inserted (NULL if empty)
+//     */
+//    retT *insert(void *data, uint32_t loc);
     
     /** Add a member to the end of the list
      *  @param data - Some data type that is added to the list

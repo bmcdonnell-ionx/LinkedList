@@ -21,12 +21,14 @@
  */
 
 #include "LinkedList.h"    // api wrapper
+#include "LogUtil.h"
 
 template<class retT>
 LinkedList<retT>::LinkedList()
 {
     // clear the members
     _head = 0;
+    _head->next = 0;
 
     return;
 }
@@ -50,8 +52,7 @@ retT *LinkedList<retT>::push(void *data)
     // make sure the new object was allocated
     if (0 == new_node)
     {
-        // output an error message here
-        //error( DBG_MSG("Memory Allocation Failed") );
+        ERROR("Memory allocation failed\n");
     }
     // update the next item in the list to the current head
     new_node->next = _head;
@@ -62,36 +63,35 @@ retT *LinkedList<retT>::push(void *data)
     return _head;
 }
 
-template<class retT>
-retT *LinkedList<retT>::insert(void *data, uint32_t loc)
-{
-    retT *new_node = new retT [1];
-    // make sure the new object was allocated
-    if (0 == new_node)
-    {
-        // output an error message here
-        //error( DBG_MSG("Memory Allocation Failed") );
-    }
-    retT *current = _head->next;
-    retT *prev = _head;
-    // move to the item we want to insert
-    for (uint32_t i=1; i!=(loc-1); i++)
-    {
-        prev = current;
-        current = current->next;
-    }
-    // store the address to the linked datatype
-    new_node->data = data;
-    // clear the next pointer
-    new_node->next = 0;
-    // update the list and store the new stuff
-    prev->next = new_node;
-    new_node->next = current;
-    // store the address to the linked datatype
-    _head->data = data;
-
-    return prev->next;
-}
+//template<class retT>
+//retT *LinkedList<retT>::insert(void *data, uint32_t loc)
+//{
+//    retT *new_node = new retT [1];
+//    // make sure the new object was allocated
+//    if (0 == new_node)
+//    {
+//        ERROR("Memory allocation failed\n");
+//    }
+//    retT *current = _head->next;
+//    retT *prev = _head;
+//    // move to the item we want to insert
+//    for (uint32_t i=1; i!=(loc-1); i++)
+//    {
+//        prev = current;
+//        current = current->next;
+//    }
+//    // store the address to the linked datatype
+//    new_node->data = data;
+//    // clear the next pointer
+//    new_node->next = 0;
+//    // update the list and store the new stuff
+//    prev->next = new_node;
+//    new_node->next = current;
+//    // store the address to the linked datatype
+//    _head->data = data;
+//
+//    return prev->next;
+//}
 
 template<class retT>
 retT *LinkedList<retT>::append(void *data)
@@ -101,8 +101,7 @@ retT *LinkedList<retT>::append(void *data)
     // make sure the new object was allocated
     if (0 == new_node)
     {
-        // output an error message here
-        //error( DBG_MSG("Memory Allocation Failed") );
+        ERROR("Memory allocation failed\n");
     }
     // store the address to the linked datatype
     new_node->data = data;
@@ -132,19 +131,19 @@ template<class retT>
 retT *LinkedList<retT>::remove(uint32_t loc)
 {
     retT *current = _head;
-    retT *prev;
+    retT *prev = 0;
     // make sure we have an item to remove
-    if (loc <= length())
+    if (loc < length())
     {
         // move to the item we want to delete
-        if (1 == loc)
+        if (0 == loc)
         {
             _head = current->next;
             delete [] current;
         }
         else
         {
-            for (uint32_t i=1; i!=loc; i++)
+            for (uint32_t i=0; i<loc; ++i)
             {
                 prev = current;
                 current = current->next;
@@ -168,7 +167,7 @@ retT *LinkedList<retT>::pop(uint32_t loc)
         return 0;
     }
     // and if so jump down the list
-    for (uint32_t i=1; i!=loc; i++)
+    for (uint32_t i=0; i<loc; ++i)
     {
         current = current->next;
     }
@@ -191,7 +190,7 @@ uint32_t LinkedList<retT>::length(void)
     return count;
 }
 
-// pre-define the templated instance for the linker
+// pre-define the type for the linker
 template class LinkedList<node>;
 
 
