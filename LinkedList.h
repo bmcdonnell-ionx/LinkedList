@@ -37,7 +37,6 @@ struct node
 
 /** Example using the LinkedList Class
  * @code
- * int main(void)
  *  #include "mbed.h"
  *  #include "LinkedList.h"
  *  
