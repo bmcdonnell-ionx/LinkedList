@@ -133,17 +133,17 @@ retT *LinkedList<retT>::remove(uint32_t loc)
     retT *current = _head;
     retT *prev = 0;
     // make sure we have an item to remove
-    if (loc < length())
+    if ((loc < length()) && (loc > 0))
     {
         // move to the item we want to delete
-        if (0 == loc)
+        if (1 == loc)
         {
             _head = current->next;
             delete [] current;
         }
         else
         {
-            for (uint32_t i=0; i<loc; ++i)
+            for (uint32_t i=2; i<=loc; ++i)
             {
                 prev = current;
                 current = current->next;
@@ -162,12 +162,12 @@ retT *LinkedList<retT>::pop(uint32_t loc)
 {
     retT *current = _head;
     // make sure we have something in the location
-    if (loc > length())
+    if ((loc > length()) || (loc == 0))
     {
         return 0;
     }
     // and if so jump down the list
-    for (uint32_t i=0; i<loc; ++i)
+    for (uint32_t i=2; i<=loc; ++i)
     {
         current = current->next;
     }
@@ -178,12 +178,12 @@ retT *LinkedList<retT>::pop(uint32_t loc)
 template<class retT>
 uint32_t LinkedList<retT>::length(void)
 {
-    int count = 0;
+    int32_t count = 0;
     retT *current = _head;
     //loop until the end of the list is found
     while (current != 0)
     {
-        count++;
+        ++count;
         current = current->next;
     }
 

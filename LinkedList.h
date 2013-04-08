@@ -52,7 +52,7 @@ struct node
  *      list.push((char*)"One\n");
  *      list.append((char*)"Five\n");
  *      
- *      for(int i=0; i<list.length(); i++)
+ *      for(int i=1; i<=list.length(); i++)
  *      {
  *          tmp = list.pop(i);
  *          printf("%s", (char *)tmp->data);
