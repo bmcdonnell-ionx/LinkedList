@@ -26,9 +26,9 @@
 template<class retT>
 LinkedList<retT>::LinkedList()
 {
-    // clear the members
+    // clear the member
     _head = 0;
-    _head->next = 0;
+//    _head->next = 0;
 
     return;
 }
