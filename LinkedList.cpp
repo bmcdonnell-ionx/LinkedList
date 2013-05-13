@@ -37,10 +37,7 @@ template<class retT>
 LinkedList<retT>::~LinkedList()
 {
     // free any memory that is on the heap
-    while(0 != length())
-    {
-        LinkedList::remove(1);
-    }
+    while(remove(1) != NULL);
 
     return;
 }
@@ -133,7 +130,7 @@ retT *LinkedList<retT>::remove(uint32_t loc)
     retT *current = _head;
     retT *prev = 0;
     // make sure we have an item to remove
-    if ((loc < length()) && (loc > 0))
+    if ((loc <= length()) && (loc > 0))
     {
         // move to the item we want to delete
         if (1 == loc)
