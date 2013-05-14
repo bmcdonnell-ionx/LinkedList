@@ -28,7 +28,6 @@ LinkedList<retT>::LinkedList()
 {
     // clear the member
     _head = 0;
-//    _head->next = 0;
 
     return;
 }
